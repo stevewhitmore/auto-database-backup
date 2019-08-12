@@ -1,0 +1,10 @@
+[DATABASE_ACCESS]
+PHP_MYADMIN_URL=
+USERNAME=
+PASSWORD=
+DATABASE_NAME=
+
+[FOLLOWUP]
+EMAIL=<where to send notifications>
+LOG_FILE=<wherever you want to store log output>
+DESTINATION_FOLDER=<path/to/desired/download/location>
