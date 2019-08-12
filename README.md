@@ -18,5 +18,6 @@ This project is intended to run as a cron job. The bash script kicks off a Pytho
     * options.binary_location will need to be changed if non-Linux OS is running this script
 
 ### *\*\*\* This is a work in progress. The remaining tasks need to be completed before this project can be considered "finished":
-- Check in script for sheet upload
-- Check in script for email notification
+- Fix headless problem; fails at download button press if run in headless mode
+- Finish rename of file
+- Add compression
