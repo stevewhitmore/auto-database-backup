@@ -19,5 +19,6 @@ This project is intended to run as a cron job. The bash script kicks off a Pytho
 
 ### *\*\*\* This is a work in progress. The remaining tasks need to be completed before this project can be considered "finished":
 - Fix headless problem; fails at download button press if run in headless mode
+- Two functions are pretty much identical. Fix that wet junk.
 - Finish rename of file
 - Add compression
