@@ -6,12 +6,11 @@ A simple pair of bash and selenium scripts to export, compress, and rename datab
 This project is intended to run as a cron job. The bash script kicks off a Python script, which uses Python's Selenium library to log into your shared hosting's phpMyAdmin page and download the latest copy of the specified database.
 
 ```
-5 0 * * 0        * cd /path/to/executable; run.sh # run script every Sunday at 12:05am
+5 0 * * 0 cd /path/to/executable; run.sh # run script every Sunday at 12:05am
 ````
 
 ### Requirements 
-* Python v3+
-   * To be clear, you'll want to alias "python" v3. In my case I have `alias python=python3`. If you don't have your python command aliased (you should) you'll need to update run.sh to prevent the scripts from running in python v2.
+* Python (works in v2.7 or v3+)
 * pip
 * selenium
 * chromium-browser 
