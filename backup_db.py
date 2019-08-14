@@ -83,9 +83,4 @@ def run_script():
     # update_file_name()
 
 
-try:
-    run_script()
-except RuntimeError:
-    print('RuntimeError occurred. Exiting...')
-    driver.quit()
-    
+run_script()
