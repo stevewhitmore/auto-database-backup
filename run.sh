@@ -8,19 +8,22 @@ run_backup_db_script() {
     python ./backup_db.py
 }
 output=$(run_backup_db_script 2>&1)
-echo -e $(date) '\n' $output >> $log_file
+echo -e "$(date)" '\n' "$output" >> "$log_file"
 
-if [ $? -ne 0 ]; then
-    mail -s "Database backup Script Failed" $report_email < /dev/null
-    
-    notify-send "Database backup Script Failed" "$date_time" \
-    -i /usr/share/icons/gnome/48x48/status/weather-severe-alert.png \
-    -u critical
+if [ -z "$output" ]; then
+    # No output is good output
+    notification_message="Database backup successful"
+    notification_image="/usr/share/icons/gnome/48x48/status/weather-clear.png"
 else
-    notify-send "Database backup successful" "$date_time" \
-    -i /usr/share/icons/gnome/48x48/status/weather-clear.png \
-    -u critical
+    notification_message="Database backup script failed"
+    notification_image="/usr/share/icons/gnome/48x48/status/weather-severe-alert.png"
+
+    mail -s "$notification_message" "$report_email" < /dev/null
 fi
+
+notify-send "$notification_message" "$date_time" \
+-i "$notification_image" \
+-u critical
 
 pkill chromium
 exit $?
