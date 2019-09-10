@@ -9,4 +9,4 @@ shellcheck:
     - apt update && apt install -y shellcheck
     - shellcheck --version
   script:
-    - shellcheck *.sh
+    - shellcheck init_backup.sh manage_backup.sh

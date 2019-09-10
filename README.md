@@ -1,23 +1,24 @@
 # Auto Database Backup
-A simple pair of bash and selenium scripts to export, compress, and rename databases. Believe it or not, there are some shared hosting plans that don't include automatic database backups. But instead of paying up for a more expensive plan (which really would make more sense at this point) we'll run these scripts every week and get the backups ourselves.
-
+A simple pair of bash and scripts to export, compress, and download databases. Believe it or not, there are some shared hosting plans that don't include automatic database backups.
 
 ### How does it work?
-This project is intended to run as a cron job. The bash script kicks off a Python script, which uses Python's Selenium library to log into your shared hosting's phpMyAdmin page and download the latest copy of the specified database.
+This project is intended to run as a cron job locally and remotely. The local script (init_backup.sh) uploads the temporary remote script (backup.sh) that generates the backup. A permenant remote script (manage_backup.sh) runs shortly after the local script, compresses and renames the database backup, then deletes the temporary script along with the uncompressed backup.
 
+Local crontab
 ```
-5 0 * * 0 cd /path/to/executable; run.sh # run script every Sunday at 12:05am
+5 0 * * 0 cd /path/to/executable; init_backup.sh # run script every Sunday at 12:05am
+````
+
+Remote crontab
+```
+7 0 * * 0 cd /path/to/executable; manage_backup.sh # run script every Sunday at 12:07am
 ````
 
 ### Requirements 
-* Python (works in v2.7 or v3+)
-* pip
-* selenium
-* chromium-browser 
-    * options.binary_location will need to be changed if non-Linux OS is running this script
+* bash
+* sshpass
 
 ### *\*\*\* This is a work in progress. The remaining tasks need to be completed before this project can be considered "finished":
-- Fix headless problem; fails at download button press if run in headless mode
-- Two functions are pretty much identical. Fix that wet junk.
-- Finish rename of file
-- Add compression
+This could be more efficient but is a better solution to what I was doing with Selenium in Python. Look for ways to
+- Remove the need for a temporary script
+- and/or find a way to trigger backups from a single origin (instead of 2 scripts on 2 different crontabs)
